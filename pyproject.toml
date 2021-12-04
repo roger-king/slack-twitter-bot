@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "slack-twitter-bot"
+version = "0.1.0"
+description = "A slack event listener to post messages from a channel to twitter"
+authors = ["roger-king <rogr.king@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+slack-sdk = "^3.12.0"
+fastapi = "^0.70.0"
+uvicorn = {extras = ["standard"], version = "^0.15.0"}
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
