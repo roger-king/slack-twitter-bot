@@ -13,6 +13,6 @@ def post_tweet(text: str):
     complete_tweet = f'{text} {build_hashtags()}'
 
     if len(complete_tweet) <= 280:
-        api.create_tweet(text=complete_tweet)
+        api.create_tweet(text=complete_tweet.strip())
     else:
         print("tweet is too long: {text}")
