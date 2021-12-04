@@ -24,6 +24,32 @@ def setup_routers():
     app.include_router(api_router, prefix=settings.API_STR)
 
 
-@app.on_event("startup")
+def check_env_vars():
+    missing_required_envs = []
+    if settings.TWITTER_ACCESS_SECRET == None:
+        missing_required_envs.append('TWITTER_ACCESS_SECRET')
+
+    if settings.TWITTER_ACCESS_TOKEN == None:
+        missing_required_envs.append('TWITTER_ACCESS_TOKEN')
+
+    if settings.TWITTER_CONSUMER_KEY == None:
+        missing_required_envs.append('TWITTER_API_KEY')
+
+    if settings.TWITTER_CONSUMER_SECRET == None:
+        missing_required_envs.append('TWITTER_API_SECRET_KEY')
+
+    if len(settings.CHANNELS_TO_WATCH) == 0:
+        print("no channels set to watch")
+
+    return missing_required_envs
+
+
+@ app.on_event("startup")
 async def startup_event():
+    required_vars = check_env_vars()
+
+    if len(required_vars) > 0:
+        print(f"missing required environment variables: {required_vars}")
+        exit(1)
+
     setup_routers()
