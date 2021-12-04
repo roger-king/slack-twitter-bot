@@ -1,5 +1,6 @@
 from pytwitter import Api
 from app.core import settings
+from app.services.hashtag import build_hashtags
 
 
 def post_tweet(text: str):
@@ -9,4 +10,9 @@ def post_tweet(text: str):
         access_token=settings.TWITTER_ACCESS_TOKEN,
         access_secret=settings.TWITTER_ACCESS_SECRET
     )
-    api.create_tweet(text=text)
+    complete_tweet = f'{text} {build_hashtags()}'
+
+    if len(complete_tweet) <= 280:
+        api.create_tweet(text=complete_tweet)
+    else:
+        print("tweet is too long: {text}")
