@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     TWITTER_CONSUMER_SECRET: str = os.getenv("TWITTER_API_SECRET_KEY")
     TWITTER_ACCESS_TOKEN: str = os.getenv("TWITTER_ACCESS_TOKEN")
     TWITTER_ACCESS_SECRET: str = os.getenv("TWITTER_ACCESS_SECRET")
+    TAGS: list[str] = [] if len(os.getenv(
+        "HASHTAGS", "")) == 0 else os.getenv("HASHTAGS", "").split(",")
 
     class Config:
         env_file = ".env"
