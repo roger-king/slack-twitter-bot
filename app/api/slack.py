@@ -17,7 +17,7 @@ def slack_event_listner(input: Union[SlackEventsResponse, SlackURLVerification])
     channel = input.event.channel
     if len(settings.CHANNELS_TO_WATCH) > 0 and channel in settings.CHANNELS_TO_WATCH:
         channel_type = input.event.channel_type
-        if channel_type == 'channel':
+        if channel_type == 'channel' or channel_type == 'group':
             print("posting tweet")
             post_tweet(input.event.text)
         return True
