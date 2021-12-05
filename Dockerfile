@@ -6,7 +6,7 @@ WORKDIR /app
 RUN pip install poetry
 COPY poetry.lock .
 COPY pyproject.toml .
-RUN poetry lock && poetry export -f requirements.txt --without-hashes > requirements.txt && python -m spacy download en_core_web_sm
+RUN poetry lock && poetry export -f requirements.txt --without-hashes > requirements.txt
 
 # Development stage
 FROM base as dev
